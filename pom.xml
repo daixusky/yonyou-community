@@ -8,18 +8,42 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>open</name>
-	<url>http://maven.apache.org</url>
+	<name>yonyou-community</name>
+	<url>https://github.com/daixusky/yonyou-community</url>
+	<description>用友开发者社区开放平台SDK</description>
+	<issueManagement>
+		<system>Github Issue</system>
+		<url>https://github.com/daixusky/yonyou-community/issues</url>
+	</issueManagement>
 
+	<developers>
+		<developer>
+			<name>daixusky</name>
+			<email>daixusky@163.com</email>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git@github.com:daixusky/yonyou-community.git</connection>
+		<developerConnection>scm:git:git@github.com:daixusky/yonyou-community.git</developerConnection>
+		<url>https://github.com/daixusky/yonyou-community</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
 		<dependency>
-		    <groupId>cn.hutool</groupId>
-		    <artifactId>hutool-json</artifactId>
-		    <version>5.8.28</version>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-json</artifactId>
+			<version>5.8.28</version>
 		</dependency>
 	</dependencies>
 
