@@ -9,8 +9,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import cn.hutool.json.JSONUtil;
-
 /**
  * http请求工具类
  * 
@@ -85,30 +83,18 @@ public class HttpUtil {
 		return sb.toString();
 	}
 
-	// 发起 HTTP 请求并获取响应内容
-	// 重载 requestHTTPContent()，相当于参数有默认值
-	public static String requestHTTPContent(String strURL) throws Exception {
-		return requestHTTPContent(strURL, "GET", null, null);
-	}
 
-	public static String requestHTTPContent(String strURL, String method) throws Exception {
-		return requestHTTPContent(strURL, method, null, null);
-	}
-
-	public static String requestHTTPContent(String strURL, String method, Map<String, ?> headers) throws Exception {
-		return requestHTTPContent(strURL, method, headers, null);
-	}
-
-	public static String requestHTTPContent(String strURL, String method, Map<String, ?> headers, Map<String, ?> params)
+	public static String requestHTTPContent(String strURL, String method, Map<String, ?> headers, Map<String, ?> params,String jsonBody)
 			throws Exception {
 		// strURL 是 String 类型的 URL
 		// method 是 String 类型的请求方法，为 "GET" 或 "POST"
 		// headers 键与值分别是请求头名与请求头值，有重复同名请求头时将多个值放进数组
 		// params 键与值分别是参数名与参数值，URL 有重复同名参数时将多个值放进数组
 		// GET 方法下，query 参数拼接在 URL 字符串末尾
-		if (method.equals("GET") && params != null) {
-			strURL = concatParamsToURL(strURL, params);
-		}
+		//if (method.equals("GET") && params != null) {
+		//	strURL = concatParamsToURL(strURL, params);
+		//}
+		strURL = concatParamsToURL(strURL, params);
 
 		URL url = new URL(strURL);
 		HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
@@ -125,12 +111,12 @@ public class HttpUtil {
 		httpConn.setDoInput(true);
 
 		// 此处默认 POST 方法发送的内容就是 JSON 形式的 body 参数，可以自行更改
-		if (method.equals("POST") && params != null) {
+		if (method.equals("POST") && jsonBody != null) {
 			// 发送请求
 			OutputStream out = new DataOutputStream(httpConn.getOutputStream());
 			// getBytes() 作用为根据参数给定的编码方式，将一个字符串转化为一个字节数组
 			
-			out.write(JSONUtil.toJsonStr(params).getBytes("UTF-8"));
+			out.write(jsonBody.getBytes("UTF-8"));
 			out.flush();
 		} else {
 			// 发送请求

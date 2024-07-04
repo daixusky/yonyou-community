@@ -26,6 +26,8 @@ public abstract class Request {
 	
 	protected long diffTime = 0L;
 	
+	protected String body;
+	
 	protected Request() {
 		params = ParamBulider.create();
 	}
@@ -67,6 +69,11 @@ public abstract class Request {
 		return this;
 	}
 	
+	public Request setBody(String jsonBody) {
+		this.body = jsonBody;
+		return this;
+	}
+	
 	/**
 	 * 添加请求参数
 	 * @param params
@@ -79,7 +86,7 @@ public abstract class Request {
 	
 	public String ok() throws Exception {
 		init(this.type);
-		return HttpUtil.requestHTTPContent(url, method, header, params);
+		return HttpUtil.requestHTTPContent(url, method, header, params,body);
 	}
 
 }
